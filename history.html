@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyhealth Covid Analysis</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+<body onload="fetchAndLoadGraph();">
+    <h1 class="text-center">Cyhealth Covid Analysis</h1>
+    <div class="container">
+    <a href="index.html">Statistics</a>
+    <a href="history.html">History</a>
+    </div>
+    <div class = "container" id= "datepicker">
+    <input class= "form-control" type="datetime-local" placeholder="Select DateTime"> 
+    </div>
+    <div class="container">
+      <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+     </div>
+     <script src="history.js"></script>
+     <link rel="stylesheet" type="text/css" href="styles.css" />   
+     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+     <script>flatpickr("input[time=datetime-local]", {});</script>
+</body>
+</html>

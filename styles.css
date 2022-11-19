@@ -8,3 +8,25 @@
     background-color:red;
     box-sizing: border-box;
 }
+
+#country-search {
+    width: 40%;
+}
+
+#history-country {
+    width: 40%;
+}
+
+#history-date {
+ width: 40%;
+}
+
+.search-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.navbar-brand{
+    padding-left: 10px;
+}

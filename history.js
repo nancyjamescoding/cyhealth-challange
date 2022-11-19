@@ -7,8 +7,7 @@ const fetchHistoricalData = async (country='usa', dataDate=null) => {
     }
     if (dataDate == null){
         td =  new Date()
-        dataDate =`${td.getFullYear()}-${td.getMonth() + 1}-${td.getDate() - 2}`
-        console.log('---', dataDate)
+        dataDate =`${td.getFullYear()}-${td.getMonth() + 1}-${td.getDate() - 1}`
     }
     const requestUrl = `https://covid-193.p.rapidapi.com/history?country=${country}&day=${dataDate}`;
 
@@ -17,10 +16,18 @@ const fetchHistoricalData = async (country='usa', dataDate=null) => {
 	.then(response => response.response)
 	.catch(() => {return []});
 }
-const fetchAndLoadGraph = async () => {
+const displayCountry = async (event) => {
+    event.preventDefault()
+    const country = document.getElementById('history-country').value
+    const dataDate = document.getElementById('history-date').value
+    await fetchAndLoadGraph(country, dataDate)
+    
+    
+}
+const fetchAndLoadGraph = async (country, dataDate) => {
     // call api and get data
 
-    const historicalData = await fetchHistoricalData()
+    const historicalData = await fetchHistoricalData(country, dataDate)
 
     const cases = historicalData.filter((item, index) => {
         return new Date(item.time).getMinutes() == 0 // get top of the hour
@@ -43,22 +50,15 @@ const fetchAndLoadGraph = async () => {
         return { x: td.getHours(),y: item.tests.total}
     })
     .sort((a, b) => a.x - b.x)
- 
-    
-    deaths = [
-        { x: new Date(2016, 0, 1),  y: 19034.5 },
-        { x: new Date(2016, 1, 1), y: 20015 },
-        { x: new Date(2016, 2, 1), y: 27342 },
-        { x: new Date(2016, 3, 1),  y: 20088 },
-        { x: new Date(2016, 4, 1),  y: 20234 },
-        { x: new Date(2016, 5, 1),  y: 29034 },
-        { x: new Date(2016, 6, 1), y: 30487 },
-        { x: new Date(2016, 7, 1), y: 32523 },
-        { x: new Date(2016, 8, 1),  y: 20234 },
-        { x: new Date(2016, 9, 1),  y: 27234 },
-        { x: new Date(2016, 10, 1),  y: 33548 },
-        { x: new Date(2016, 11, 1), y: 32534 }
-    ]
+
+    const deaths = historicalData.filter((item, index) => {
+        return new Date(item.tests) // get top of the hour
+    })
+    .map((item, index) =>  {
+        td = new Date(item.time)
+        return {x: td.getHours(),y: item.deaths.total}
+    })
+    .sort((a, b) => a.x - b.x)
 
     drawGraph(cases, tests, deaths)
 }
@@ -93,8 +93,8 @@ const drawGraph = (cases, tests, deaths, ) => {
             type: "spline",
             name: "Cases",
             showInLegend: true,
-            xValueFormatString: "Hours",
-            yValueFormatString: "Cases",
+            xValueFormatString: "#",
+            yValueFormatString: "#",
             dataPoints: cases
         },
         {
@@ -102,16 +102,16 @@ const drawGraph = (cases, tests, deaths, ) => {
             name: "Tests",
             axisYType: "secondary",
             showInLegend: true,
-            xValueFormatString: "Hours",
-            yValueFormatString: "Tests",
+            xValueFormatString: "#",
+            yValueFormatString: "#",
             dataPoints: tests
         },
         {
             type: "spline",
             name: "Deaths",
             showInLegend: true,
-            xValueFormatString: "Hours",
-            yValueFormatString: "Deaths",
+            xValueFormatString: "#",
+            yValueFormatString: "#",
             dataPoints: deaths
         }]
     };
@@ -126,3 +126,4 @@ const drawGraph = (cases, tests, deaths, ) => {
         e.chart.render();
     }
 }
+

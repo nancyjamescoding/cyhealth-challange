@@ -9,15 +9,15 @@ const fetchCovidStats = async (country) => {
     `https://covid-193.p.rapidapi.com/statistics` : 
     `https://covid-193.p.rapidapi.com/statistics?country=${country}`;
 
+    console.log(requestUrl)
     return await fetch(requestUrl, options)
     .then(response => response.json())
 	.then(response => response.response)
-	.catch(() => {return []});
+	.catch(() => []);
 }
 
 const displayStats = async (country=null) => {
     const results = await fetchCovidStats(country)
-    
     if (results.length == 0) {
         alert(`Could not get the results of country - ${country}`)
     }
@@ -42,6 +42,7 @@ const searchByCountry = async (event) => {
     event.preventDefault()
     if (event.keyCode === 13) {
         country = document.getElementById('country-search').value
+        console.log(country)
         await displayStats(country)
     }
     

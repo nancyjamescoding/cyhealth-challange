@@ -1,6 +1,6 @@
 # CyHealth AnAlysis
-#### {This is a system that displays covid statistics and history}
-#### By **{Nancy Ndung'u}**
+#### This is a system that displays covid statistics and history
+#### By **Nancy Ndung'u**
 ## Description
 
    Cyhealth is a simple Covid-19 analysis system that consumes a research

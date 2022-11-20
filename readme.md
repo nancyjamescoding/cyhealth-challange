@@ -10,10 +10,12 @@
 ## Setup/Installation Requirements
 {
 * Open Terminal {Ctrl+Alt+T}
-* git clone https://cyhealth-challenge.herokuapp.com/index.html
+* git clone https://cyhealth-challenge.herokuapp.com/
 * cd cytonn-challange
 * code . or atom . depending on the text editor of your choice.
 }
+## Live Link
+https://cyhealth-challenge.herokuapp.com/
 ## BDD
 {
 * click statistics to display the statistics in the table.
